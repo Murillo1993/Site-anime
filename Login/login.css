@@ -1,0 +1,58 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(-60deg, white, blue,  black)
+}
+
+.container{
+    margin: 0 15px;
+}
+
+
+.form-login{
+    width: 100%;
+    padding: 30px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px black;
+    font-family: "Gill Sans Extrabold", sans-serif;
+}
+
+h2{ 
+    font-size: 34px;
+    text-align: center;
+    margin-bottom: 20px;
+
+}
+
+input{
+    width: 100%;
+    padding: 12px;
+    background-color: white;
+    border-radius: 6px;
+    outline-color: gray;
+    font-size: 16px;
+    color: rgb(46, 44, 44);
+    margin-bottom: 20px;
+}
+
+button{
+    width: 100%;
+    padding: 12px;
+    background-color: black;
+    border-radius: 6px;
+    border-style: outset;
+    cursor: pointer;
+    font-size: 16px;
+    color: white;
+    margin-bottom: 20px;
+    transition: 0.5s;
+}
+
+
+button:hover{
+    background-color: white;
+    color: black;
+    border-color: black;
+}
