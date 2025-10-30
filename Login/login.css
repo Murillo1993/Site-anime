@@ -59,6 +59,3 @@ button:hover{
     border-color: black;
 }
 
-input:invalid{
-    border-color: red;
-}
