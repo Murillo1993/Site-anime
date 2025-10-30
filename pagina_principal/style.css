@@ -1,0 +1,41 @@
+body{
+    margin: 0px;
+}
+
+
+.fundo-yingyang{
+    background-color: green;
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+
+.lado-preto{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70%;
+    height: 100%;
+    background-color: black;
+    color: white;
+    font-size: 30px;
+    text-align: center;
+    padding-top: 20px;
+    align-items: center;
+}
+
+.lado-branco{
+    width: 30%;
+    height: 100%;
+    background-color: white;
+}
+
+
+.catalogo-populares{
+    width: 70%;
+    height: 70%;
+    background-color: blueviolet;
+    padding-top: 30px;
+    padding-left: 50px;
+}
