@@ -1,6 +1,6 @@
 
 var listaAnimes = [
-    { titulo: 'Bleach', imagem: '../image_geral/bleachanime.png' },
+    { titulo: 'Bleach', imagem: '../image_geral/bleach.webp' },
     { titulo: 'Dragon Ball Z', imagem: '../image_geral/dragon-ball-z.jpg' },
     { titulo: 'Hellsing Ultimate', imagem: '../image_geral/helssing.webp' },
     { titulo: 'Naruto', imagem: '../image_geral/naruto.jpg' },
