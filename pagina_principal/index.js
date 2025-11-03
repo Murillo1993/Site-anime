@@ -6,7 +6,7 @@ var listaAnimes = [
     { titulo: 'Naruto', imagem: '../image_geral/naruto.jpg' },
     { titulo: 'One Punch Man', imagem: '../image_geral/one_punch_man.jpg' },
     { titulo: 'Overlord', imagem: '../image_geral/overlord_poster.jpg' },
-    { titulo: 'Signal of Love', imagem: '../image_geral/signal_love.jpg' },
+    { titulo: 'A Sign of Affection', imagem: '../image_geral/signal_love.jpg' },
     { titulo: 'Solo Leveling', imagem: '../image_geral/solo_leveling.webp' }
 ];
 
