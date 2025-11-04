@@ -75,6 +75,16 @@ if (json_last_error() !== JSON_ERROR_NONE) {
 $email = $dados["email"];
 $senha_pura = $dados["senha"];
 
+if (empty($email) || empty($senha_pura)) {
+
+
+        $retorno["status"] = "n";
+        $retorno["mensagem"] = "Preencha todos os campos!";
+        echo json_encode($retorno);
+        mysqli_close($con);
+        exit;
+    }
+
 $stmt = mysqli_stmt_init($con);
 $query = "SELECT id, nome, senha_hash FROM usuarios WHERE email = ?";
 
