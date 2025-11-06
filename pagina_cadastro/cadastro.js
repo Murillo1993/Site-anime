@@ -1,60 +1,71 @@
 async function Gravar() {
     try {
-        const responseChave = await fetch('../php/get_public_key.php');
-        if (!responseChave.ok) {
+        const resposta_chave_publica = await fetch('../php/get_public_key.php');
+
+        if (!resposta_chave_publica.ok) {
+
+
             throw new Error('Falha ao buscar a chave pública.');
         }
-        const publicKey = await responseChave.text();
+        const chave_publica = await resposta_chave_publica.text(); 
 
         var form = document.getElementById("cadastro-form");
-        var dados = new FormData(form);
 
-        var dadosObjeto = {};
-        dados.forEach((value, key) => {
-            dadosObjeto[key] = value;
+        var dados_form = new FormData(form);
+
+        var valores = {};
+        dados_form.forEach((value, key) => {
+
+
+            valores[key] = value;
         });
         
-        const dadosString = JSON.stringify(dadosObjeto);
+        const valores_string = JSON.stringify(valores);
 
-        const chaveSimetrica = CryptoJS.lib.WordArray.random(32); 
+        const chave_aes = CryptoJS.lib.WordArray.random(32); 
+
+
         const iv = CryptoJS.lib.WordArray.random(16); 
 
-        const dadosCriptografados = CryptoJS.AES.encrypt(dadosString, chaveSimetrica, {
-            iv: iv, mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7
+        const mensagem_criptografada = CryptoJS.AES.encrypt(valores_string, chave_aes, {
+            iv: iv,
+            mode: CryptoJS.mode.CBC,
+            padding: CryptoJS.pad.Pkcs7
         }).toString();
 
-        const encryptRSA = new JSEncrypt();
-        encryptRSA.setPublicKey(publicKey);
+        var criptografia_rsa = new JSEncrypt(); 
 
-        const chaveSimetricaHex = CryptoJS.enc.Hex.stringify(chaveSimetrica);
-        const ivHex = CryptoJS.enc.Hex.stringify(iv);
-        const chaveE_IV = JSON.stringify({ key: chaveSimetricaHex, iv: ivHex });
+        criptografia_rsa.setPublicKey(chave_publica);
+
+        const chave_aes_hex = CryptoJS.enc.Hex.stringify(chave_aes);
+
+        const iv_hex = CryptoJS.enc.Hex.stringify(iv);
+
+        const pacote_chave_json = JSON.stringify({ key: chave_aes_hex, iv: iv_hex });
         
-        const chaveCriptografada = encryptRSA.encrypt(chaveE_IV);
-        if (chaveCriptografada === false) {
-            throw new Error('Falha ao criptografar a chave simétrica com RSA.');
-        }
+        const chave_aes_criptografada = criptografia_rsa.encrypt(pacote_chave_json);
 
-        var formDataFinal = new FormData();
-        formDataFinal.append('dados_criptografados', dadosCriptografados);
-        formDataFinal.append('chave_criptografada', chaveCriptografada);
+        var envio_final = new FormData();
+
+        envio_final.append('mensagem_criptografada', mensagem_criptografada);
+        
+        envio_final.append('chave_criptografada', chave_aes_criptografada);
 
         var resposta = await fetch("../php/gravar.php", {
             method: "POST",
-            body: formDataFinal
+            body: envio_final 
         });
 
-        var dados_retorno = await resposta.json();
+        var retorno_php = await resposta.json();
 
-        alert(dados_retorno.mensagem);
+        alert(retorno_php.mensagem);
 
-        if (dados_retorno.status == "s") {
-      
-            window.location.href = "../Login/login.html";
+        if (retorno_php.status == "s") {
+            window.location.href = "/Site-anime/Site-anime/Login/login.html"; 
         }
 
     } catch (error) {
-        console.error("Erro no processo de cadastro:", error);
+        console.error("Erro no cadastro:", error);
         alert("Ocorreu um erro grave no cadastro: " + error.message);
     }
 }
